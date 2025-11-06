@@ -1,8 +1,11 @@
 return {
-  'saghen/blink.cmp',
-  event = 'VimEnter',
+  'Saghen/blink.cmp',
+  event = 'InsertEnter',
   version = '1.*',
+
   dependencies = {
+    'neovim/nvim-lspconfig',
+    'zbirenbaum/copilot.lua',
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',
@@ -12,16 +15,26 @@ return {
         end
         return 'make install_jsregexp'
       end)(),
-      dependencies = {},
-      opts = {},
     },
-    'folke/lazydev.nvim',
+    'folke/lazydev.nvim', -- optional Lua dev source
+    'fang2hou/blink-copilot',
   },
-  --- @module 'blink.cmp'
-  --- @type blink.cmp.Config
+
+  ---@type blink.cmp.Config
   opts = {
     keymap = {
       preset = 'default',
+      ['<CR>'] = { 'accept', 'fallback' },
+      ['<Tab>'] = { 'select_next', 'fallback' },
+      ['<S-Tab>'] = { 'select_prev', 'fallback' },
+    },
+    menu = {
+      draw = {
+        columns = {
+          { 'label', 'label_description', gap = 1 },
+          { 'kind_icon', 'kind' },
+        },
+      },
     },
 
     appearance = {
@@ -29,18 +42,37 @@ return {
     },
 
     completion = {
-      documentation = { auto_show = true, auto_show_delay_ms = 500 },
-    },
-
-    sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
-      providers = {
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+      menu = { border = 'rounded' },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 100,
+        window = { border = 'rounded' },
       },
+      ghost_text = { enabled = true },
     },
 
     snippets = { preset = 'luasnip' },
-    fuzzy = { implementation = 'lua' },
+
+    sources = {
+      default = {
+        'lsp', -- Language server completions
+        'path', -- File paths
+        'buffer', -- Buffer words
+        'snippets', -- LuaSnip
+        'lazydev', -- For Lua
+      },
+      providers = {
+        lazydev = {
+          module = 'lazydev.integrations.blink',
+          score_offset = 100,
+        },
+        copilot = {
+          name = 'copilot',
+          module = 'blink-copilot',
+          async = true,
+        },
+      },
+    },
 
     signature = { enabled = true },
   },

@@ -1,122 +1,130 @@
 return {
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    init = function()
-      vim.g.copilot_no_maps = true
-      vim.g.copilot_no_tab_map = true
-      vim.g.copilot_assume_mapped = true
-    end,
-    config = function()
-      require('copilot').setup {
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = '<C-l>',
-            next = '<C-]>',
-            prev = '<C-[>',
-            dismiss = '<C-\\>',
-          },
-          show_predictive_index = false,
-        },
-        panel = { enabled = false },
-      }
-      vim.api.nvim_create_autocmd('InsertEnter', {
-        callback = function()
-          vim.keymap.set('i', '<Esc>', '<Esc>', { noremap = true, silent = true, buffer = true })
-        end,
-      })
-    end,
-  },
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'main',
-    event = 'VeryLazy',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'zbirenbaum/copilot.lua',
-    },
-    opts = {
-      model = 'claude-sonnet-4',
-      debug = false,
-      context = 'buffers',
-      window = {
-        layout = 'vertical',
-        position = 'right',
-        width = 0.3,
-      },
-      headers = {
-        user = 'You',
-        assistant = 'Copilot',
-      },
-    },
-
-    config = function()
-      local function set_copilotchat_highlights()
-        vim.api.nvim_set_hl(0, 'CopilotChatResource', { fg = '#F7768E', bold = true })
-        vim.api.nvim_set_hl(0, 'CopilotChatTool', { fg = '#E0AF68', bold = true })
-        vim.api.nvim_set_hl(0, 'CopilotChatPrompt', { fg = '#9ECE6A', bold = true })
-        vim.api.nvim_set_hl(0, 'CopilotChatModel', { fg = '#BB9AF7', italic = true })
-        vim.api.nvim_set_hl(0, 'CopilotChatUri', { fg = '#7dcfff', underline = true })
-      end
-
-      set_copilotchat_highlights()
-
-      vim.api.nvim_create_autocmd('ColorScheme', {
-        callback = set_copilotchat_highlights,
-      })
-    end,
-
-    keys = function()
-      local chat = require 'CopilotChat'
-      return {
-        {
-          '<leader>cc',
-          function()
-            chat.toggle()
-          end,
-          desc = 'Toggle Copilot Chat',
-        },
-        {
-          '<leader>cb',
-          function()
-            chat.open { context = 'buffers' }
-          end,
-          desc = 'Chat: buffers context',
-        },
-        {
-          '<leader>cw',
-          function()
-            chat.open { context = 'workspace' }
-          end,
-          desc = 'Chat: workspace context',
-        },
-        {
-          '<leader>cv',
-          function()
-            chat.open { context = 'selection' }
-          end,
-          mode = 'v',
-          desc = 'Chat: visual selection',
-        },
-        {
-          '<leader>ce',
-          function()
-            chat.ask '/Explain'
-          end,
-          desc = 'Explain code',
-        },
-        {
-          '<leader>cq',
-          function()
-            chat.close()
-          end,
-          desc = 'Close Copilot Chat',
-        },
-      }
-    end,
-  },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   event = 'InsertEnter',
+  --   opts = {
+  --     suggestion = { enabled = false },
+  --     panel = { enabled = false },
+  --   },
+  -- },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   init = function()
+  --     vim.g.copilot_no_maps = true
+  --     vim.g.copilot_no_tab_map = true
+  --     vim.g.copilot_assume_mapped = true
+  --   end,
+  --   config = function()
+  --     require('copilot').setup {
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         debounce = 75,
+  --         keymap = {
+  --           accept = '<C-l>',
+  --           next = '<C-]>',
+  --           prev = '<C-[>',
+  --           dismiss = '<C-\\>',
+  --         },
+  --         show_predictive_index = false,
+  --       },
+  --       panel = { enabled = false },
+  --     }
+  --     vim.api.nvim_create_autocmd('InsertEnter', {
+  --       callback = function()
+  --         vim.keymap.set('i', '<Esc>', '<Esc>', { noremap = true, silent = true, buffer = true })
+  --       end,
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   'CopilotC-Nvim/CopilotChat.nvim',
+  --   branch = 'main',
+  --   event = 'VeryLazy',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     'zbirenbaum/copilot.lua',
+  --   },
+  --   opts = {
+  --     model = 'claude-sonnet-4',
+  --     debug = false,
+  --     context = 'buffers',
+  --     window = {
+  --       layout = 'vertical',
+  --       position = 'right',
+  --       width = 0.3,
+  --     },
+  --     headers = {
+  --       user = 'You',
+  --       assistant = 'Copilot',
+  --     },
+  --   },
+  --
+  --   config = function()
+  --     local function set_copilotchat_highlights()
+  --       vim.api.nvim_set_hl(0, 'CopilotChatResource', { fg = '#F7768E', bold = true })
+  --       vim.api.nvim_set_hl(0, 'CopilotChatTool', { fg = '#E0AF68', bold = true })
+  --       vim.api.nvim_set_hl(0, 'CopilotChatPrompt', { fg = '#9ECE6A', bold = true })
+  --       vim.api.nvim_set_hl(0, 'CopilotChatModel', { fg = '#BB9AF7', italic = true })
+  --       vim.api.nvim_set_hl(0, 'CopilotChatUri', { fg = '#7dcfff', underline = true })
+  --     end
+  --
+  --     set_copilotchat_highlights()
+  --
+  --     vim.api.nvim_create_autocmd('ColorScheme', {
+  --       callback = set_copilotchat_highlights,
+  --     })
+  --   end,
+  --
+  --   keys = function()
+  --     local chat = require 'CopilotChat'
+  --     return {
+  --       {
+  --         '<leader>cc',
+  --         function()
+  --           chat.toggle()
+  --         end,
+  --         desc = 'Toggle Copilot Chat',
+  --       },
+  --       {
+  --         '<leader>cb',
+  --         function()
+  --           chat.open { context = 'buffers' }
+  --         end,
+  --         desc = 'Chat: buffers context',
+  --       },
+  --       {
+  --         '<leader>cw',
+  --         function()
+  --           chat.open { context = 'workspace' }
+  --         end,
+  --         desc = 'Chat: workspace context',
+  --       },
+  --       {
+  --         '<leader>cv',
+  --         function()
+  --           chat.open { context = 'selection' }
+  --         end,
+  --         mode = 'v',
+  --         desc = 'Chat: visual selection',
+  --       },
+  --       {
+  --         '<leader>ce',
+  --         function()
+  --           chat.ask '/Explain'
+  --         end,
+  --         desc = 'Explain code',
+  --       },
+  --       {
+  --         '<leader>cq',
+  --         function()
+  --           chat.close()
+  --         end,
+  --         desc = 'Close Copilot Chat',
+  --       },
+  --     }
+  --   end,
+  -- },
 }
