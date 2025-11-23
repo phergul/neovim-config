@@ -5,17 +5,23 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set('n', '<A-h>', '<C-w>h', opts)
-vim.keymap.set('n', '<A-j>', '<C-w>j', opts)
-vim.keymap.set('n', '<A-k>', '<C-w>k', opts)
-vim.keymap.set('n', '<A-l>', '<C-w>l', opts)
+vim.keymap.set('n', '<D-h>', '<C-w>h', opts)
+vim.keymap.set('n', '<D-j>', '<C-w>j', opts)
+vim.keymap.set('n', '<D-k>', '<C-w>k', opts)
+vim.keymap.set('n', '<D-l>', '<C-w>l', opts)
 
-vim.keymap.set('i', '<A-h>', '<Esc><C-w>h', opts)
-vim.keymap.set('i', '<A-j>', '<Esc><C-w>j', opts)
-vim.keymap.set('i', '<A-k>', '<Esc><C-w>k', opts)
-vim.keymap.set('i', '<A-l>', '<Esc><C-w>l', opts)
+vim.keymap.set('i', '<D-h>', '<Esc><C-w>h', opts)
+vim.keymap.set('i', '<D-j>', '<Esc><C-w>j', opts)
+vim.keymap.set('i', '<D-k>', '<Esc><C-w>k', opts)
+vim.keymap.set('i', '<D-l>', '<Esc><C-w>l', opts)
 
-vim.keymap.set('t', '<A-h>', [[<C-\><C-n><C-w>h]], opts)
-vim.keymap.set('t', '<A-j>', [[<C-\><C-n><C-w>j]], opts)
-vim.keymap.set('t', '<A-k>', [[<C-\><C-n><C-w>k]], opts)
-vim.keymap.set('t', '<A-l>', [[<C-\><C-n><C-w>l]], opts)
+vim.keymap.set('t', '<D-h>', [[<C-\><C-n><C-w>h]], opts)
+vim.keymap.set('t', '<D-j>', [[<C-\><C-n><C-w>j]], opts)
+vim.keymap.set('t', '<D-k>', [[<C-\><C-n><C-w>k]], opts)
+vim.keymap.set('t', '<D-l>', [[<C-\><C-n><C-w>l]], opts)
+
+vim.keymap.set('n', '<S-D-h>', 'gT', opts)
+vim.keymap.set('n', '<S-D-l>', 'gt', opts)
+
+vim.keymap.set('i', '<S-D-h>', '<Esc>gT', opts)
+vim.keymap.set('i', '<S-D-l>', '<Esc>gt', opts)

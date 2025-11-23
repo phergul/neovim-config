@@ -28,14 +28,14 @@ return {
       ['<Tab>'] = { 'select_next', 'fallback' },
       ['<S-Tab>'] = { 'select_prev', 'fallback' },
     },
-    menu = {
-      draw = {
-        columns = {
-          { 'label', 'label_description', gap = 1 },
-          { 'kind_icon', 'kind' },
-        },
-      },
-    },
+    -- menu = {
+    --   draw = {
+    --     columns = {
+    --       { 'label', 'label_description', gap = 1 },
+    --       { 'kind_icon', 'kind' },
+    --     },
+    --   },
+    -- },
 
     appearance = {
       nerd_font_variant = 'mono',
