@@ -1,17 +1,12 @@
 return {
-  'lmantw/themify.nvim',
-
-  lazy = false,
-  priority = 999,
-
+  'catppuccin/nvim',
+  name = 'catppuccin',
+  priority = 1000,
   config = function()
-    require('themify').setup {
-
-      'folke/tokyonight.nvim',
-      'yorumicolors/yorumi.nvim',
-      'catppuccin/nvim',
-
-      'default',
+    require('catppuccin').setup {
+      flavour = 'mocha',
+      transparent_background = true,
     }
+    vim.cmd.colorscheme 'catppuccin'
   end,
 }

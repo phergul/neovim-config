@@ -23,6 +23,18 @@ return {
           require('telescope.themes').get_dropdown(),
         },
       },
+      -- defaults = {
+      --   mappings = {
+      --     n = {
+      --       ['\\'] = require('telescope.actions').select_vertical,
+      --       ['|'] = require('telescope.actions').select_tab,
+      --     },
+      --     i = {
+      --       ['<C-\\>'] = require('telescope.actions').select_vertical,
+      --       ['<C-|>'] = require('telescope.actions').select_tab,
+      --     },
+      --   },
+      -- },
       -- pickers = {
       --   find_files = {
       --     hidden = true,
