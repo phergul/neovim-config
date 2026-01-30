@@ -8,4 +8,12 @@ return {
       vim.cmd.colorscheme 'spacedust'
     end,
   },
+  -- {
+  --   'spacedust.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'spacedust'
+  --   end,
+  -- },
 }

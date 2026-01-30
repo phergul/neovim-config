@@ -57,7 +57,7 @@ return {
 
     require('lualine').setup {
       options = {
-        theme = require('spacedust.lualine').setup(),
+        theme = require('spacedust').get_lualine_theme(),
         component_separators = '',
         section_separators = { left = '', right = '' },
       },

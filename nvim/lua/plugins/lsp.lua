@@ -137,6 +137,13 @@ return {
         end,
       },
     }
+    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+      border = border,
+    })
+
+    vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
+      border = border,
+    })
     --
     -- vim.lsp.config('sourcekit', {
     --   cmd = { '/usr/bin/sourcekit-lsp' },
