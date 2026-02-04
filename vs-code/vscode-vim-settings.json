@@ -1,4 +1,14 @@
 {
+    "editor.tabCompletion": "off",
+    "editor.acceptSuggestionOnEnter": "off",
+    "cursor.ai.acceptSuggestionOnTab": false,
+    "editor.suggestSelection": "first",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
     "vim.hlsearch": true,
@@ -625,6 +635,15 @@
                 "editor.action.triggerParameterHints"
             ],
             "silent": true
+        },
+        {
+            "before": [
+                "`"
+            ],
+            "commands": [
+                "editor.action.inlineSuggest.commit"
+            ],
+            "silent": true
         }
     ],
     "vim.insertModeKeyBindings": [
@@ -696,6 +715,42 @@
                 "<C-c>"
             ],
             "silent": true
+        },
+        {
+            "before": [
+                "<Tab>"
+            ],
+            "commands": [
+                "selectNextSuggestion"
+            ],
+            "when": "suggestWidgetVisible"
+        },
+        {
+            "before": [
+                "<S-Tab>"
+            ],
+            "commands": [
+                "selectPrevSuggestion"
+            ],
+            "when": "suggestWidgetVisible"
+        },
+        {
+            "before": [
+                "<CR>"
+            ],
+            "commands": [
+                "acceptSelectedSuggestion"
+            ],
+            "when": "suggestWidgetVisible"
+        },
+        {
+            "before": [
+                "`"
+            ],
+            "commands": [
+                "editor.action.inlineSuggest.commit"
+            ],
+            "silent": true
         }
     ],
     "vim.visualModeKeyBindings": [
@@ -707,6 +762,15 @@
             ],
             "commands": [
                 "editor.action.quickFix"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "`"
+            ],
+            "commands": [
+                "editor.action.inlineSuggest.commit"
             ],
             "silent": true
         }
